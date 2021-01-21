@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Links, LogoutBtn, NavbarContainer, Tab, Title } from './styles'
+import { Links, LogoutBtn, NavbarContainer, Tab, Title, LinksLoggedOut } from './styles'
 import { useHistory } from 'react-router-dom'
 
 const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
@@ -30,10 +30,10 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
             :
             <>
             <Title to='/'>Recipe Central</Title>
-            <Links>
+            <LinksLoggedOut>
                 <Tab to='/register'>Register</Tab>
                 <Tab to='/login'>Login</Tab>
-            </Links>
+            </LinksLoggedOut>
             </>}
         </NavbarContainer>
     )

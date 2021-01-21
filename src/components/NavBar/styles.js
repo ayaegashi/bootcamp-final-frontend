@@ -40,6 +40,20 @@ export const Links = styled.div `
     text-decoration: none;
 `
 
+export const LinksLoggedOut = styled.div ` 
+    @import url('${props => props.theme.fontSource}');
+
+    font-family: ${props => props.theme.fonts.body.fontFamily};
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: row;
+    width: 240px;
+    justify-content: space-between;
+    padding-left: 50px;
+    color: white;
+    text-decoration: none;
+`
+
 export const Tab = styled(Link) ` 
     color: white;
     text-decoration: none;

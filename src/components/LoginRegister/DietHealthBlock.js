@@ -2,7 +2,7 @@ import React from 'react'
 import { DietHealthRow } from './styles'
 
 
-const DietHealthBlock = ({label, name, checked, handleCheck, key}) => {
+const DietHealthBlock = ({label, name, checked, handleCheck}) => {
 
     return (
         <DietHealthRow>
@@ -12,6 +12,7 @@ const DietHealthBlock = ({label, name, checked, handleCheck, key}) => {
                 onChange={ handleCheck }
                 name={ name }
                 checked={ checked }
+                key={ name }
             />
         </DietHealthRow>
     )

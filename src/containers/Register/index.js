@@ -52,8 +52,8 @@ const Register = ({ setIsLoggedIn }) => {
         onCompleted:({register: {token, user: {id}}}) => {
             setId(id)
             localStorage.setItem('token', token)
-            console.log("user has been registered")
-            setRegistered(true)
+            const mytoken = localStorage.getItem('token')
+            console.log("user has been registered", mytoken)
         },
         onError: (error) => {
             let errorM = error.message.slice(14)
@@ -62,12 +62,12 @@ const Register = ({ setIsLoggedIn }) => {
         }
     })
 
-    const [addDiet, {loading: dietLoading, error: dietError}] = useMutation(ADD_DIET, {
+    const [addDiet] = useMutation(ADD_DIET, {
         onCompleted: () => {
             console.log("diet added")
         }
     })
-    const [addHealth, {loading: healthLoading, error: healthError}] = useMutation(ADD_HEALTH)
+    const [addHealth] = useMutation(ADD_HEALTH)
 
     const handleDietCheck = ({ target }) => {
         setDiet(s => ({ ...s, [target.name]: !s[target.name] }));}
@@ -76,16 +76,21 @@ const Register = ({ setIsLoggedIn }) => {
         setHealth(s => ({ ...s, [target.name]: !s[target.name] }));}
 
 
-    const handleRegister = (event) => {
+    async function handleRegister(event) {
         event.preventDefault()
         if (pass !== confpass) {
             alert("passwords don't match!")
             return
         }
-        register()
+        await register()
+        if (localStorage.getItem('token')) {
+            setIsLoggedIn(true)
+            setRegistered(true)
+        }
     }
 
     const handleSubmit = (event) => {
+        event.preventDefault()
         Object.keys(diet).forEach(key => {
             if (diet[key] === true) {
                 addDiet({
@@ -119,12 +124,11 @@ const Register = ({ setIsLoggedIn }) => {
 
     return (
         <Container>
-        { localStorage.clear() }
         <StyledForm onSubmit={handleSubmit}>
             <h1>Welcome to Recipe Central</h1>
-            <p> { errorMessage } </p>
             {!registered ?
             <>
+            <p> { errorMessage } </p>
             <InputBlock 
                 label="Email" 
                 type="text" 

@@ -22,9 +22,10 @@ const Home = () => {
   const [ingredients, setIngredients] = useState([])
   const [url, setUrl] = useState('')
 
-  // if (!localStorage.getItem('token')) {
-  //   history.push('/login')
-  // }
+  if (!localStorage.getItem('token')) {
+    console.log("nope", localStorage.getItem('token'))
+    history.push('/login')
+  }
 
   const addIngredient = i => {
     setIngredients([...ingredients, i])
