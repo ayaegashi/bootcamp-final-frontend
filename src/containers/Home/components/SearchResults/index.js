@@ -9,7 +9,7 @@ const APP_ID = 'f1500858'
 const APP_KEY = '090812a8cbcf00e2831e04f48c0fa243'
 
 const SearchResults = ({ url, ingredients }) => {
-  const { loading, error: restrictionsError, data: restrictionsData } = useQuery(GET_RESTRICTIONS)
+  // const { loading, error: restrictionsError, data: restrictionsData } = useQuery(GET_RESTRICTIONS)
 
   const history = useHistory()
   const [results, setResults] = useState([])
@@ -36,6 +36,10 @@ const SearchResults = ({ url, ingredients }) => {
     fetchData()
   }, [url])
 
+  useEffect(() => {
+    setError(false)
+  }, [results])
+
   const getRecipe = u => {
     const fetchData = async () => {
       try {
@@ -54,9 +58,9 @@ const SearchResults = ({ url, ingredients }) => {
     fetchData()
   }
 
-  if (loading) return <p>Loading...</p>
+  // if (loading) return <p>Loading...</p>
 
-  if (error || restrictionsError) {
+  if (error) {
     return (
       <>
         <h1>THIS IS AN ERROR PAGE</h1>
