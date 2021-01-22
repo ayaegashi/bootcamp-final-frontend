@@ -66,6 +66,7 @@ const Favorites = () => {
                     <Table>
                         <TRHeader>
                             <THDate>Date</THDate>
+                            <THLink>Recipe</THLink>
                             <THLink>Link</THLink>
                         </TRHeader>
 
@@ -74,6 +75,7 @@ const Favorites = () => {
                                 <Tr>
                                     <TDDate>{bookmark.createdAt}</TDDate>
                                     <TDLink><button onClick={() => getRecipe(bookmark.link)} >Go To Recipe</button></TDLink>
+                                    <TDLink><a href={bookmark.link}>{bookmark.link}</a></TDLink>
                                 </Tr>
                             </>
                         ))}
