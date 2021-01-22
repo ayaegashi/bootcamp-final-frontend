@@ -36,6 +36,10 @@ const SearchResults = ({ url, ingredients }) => {
     fetchData()
   }, [url])
 
+  useEffect(() => {
+    setError(false)
+  }, [results])
+
   const getRecipe = u => {
     const fetchData = async () => {
       try {
@@ -69,6 +73,7 @@ const SearchResults = ({ url, ingredients }) => {
     <>
       <ListContainer>
         <List>
+          {console.log(restrictionsData)}
           {results.map(({ label, url: u, uri }) => (
             <ListItem key={uri} onClick={() => getRecipe(u)}>{label}</ListItem>
           ))}
