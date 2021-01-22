@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import {StyledForm, DietHealth, DietHealthContainer, Container, LoginRegisterButton} from '../../styles'
+import {StyledForm, DietHealth, DietHealthContainer, LoginRegisterButton} from '../../styles'
+import {PageContainer, Container, Title} from './styles'
 import InputBlock from '../../components/LoginRegister/InputBlock'
 import DietHealthBlock from '../../components/LoginRegister/DietHealthBlock'
 import { REGISTER, ADD_DIET, ADD_HEALTH } from './graphql'
@@ -62,12 +63,12 @@ const Register = ({ setIsLoggedIn }) => {
         }
     })
 
-    const [addDiet] = useMutation(ADD_DIET, {
+    const [addDiet, {error: dietError}] = useMutation(ADD_DIET, {
         onCompleted: () => {
             console.log("diet added")
         }
     })
-    const [addHealth] = useMutation(ADD_HEALTH)
+    const [addHealth, {error: healthError}] = useMutation(ADD_HEALTH)
 
     const handleDietCheck = ({ target }) => {
         setDiet(s => ({ ...s, [target.name]: !s[target.name] }));}
@@ -96,9 +97,6 @@ const Register = ({ setIsLoggedIn }) => {
                 addDiet({
                     variables: {
                         input: {
-                            user: {
-                                id: userId,
-                            },
                             restriction: key,
                         },
                     },
@@ -110,9 +108,6 @@ const Register = ({ setIsLoggedIn }) => {
                 addHealth({
                     variables: {
                         input: {
-                            user: {
-                                id: userId,
-                            },
                             restriction: key,
                         },
                     },
@@ -123,9 +118,10 @@ const Register = ({ setIsLoggedIn }) => {
     }
 
     return (
+        <PageContainer>
         <Container>
         <StyledForm onSubmit={handleSubmit}>
-            <h1>Welcome to Recipe Central</h1>
+            <Title>Welcome to Recipe Central</Title>
             {!registered ?
             <>
             <p> { errorMessage } </p>
@@ -184,6 +180,7 @@ const Register = ({ setIsLoggedIn }) => {
             }
         </StyledForm>
         </Container>
+        </PageContainer>
     )
 }
 
