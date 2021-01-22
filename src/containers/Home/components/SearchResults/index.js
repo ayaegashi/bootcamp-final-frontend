@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useQuery } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
 import { ListContainer, List, ListItem } from './styles'
-import GET_RESTRICTIONS from './graphql'
 
 const API_KEY = '5dc246545b634cc48af9fb7a2a5e609a'
 const APP_ID = 'f1500858'
 const APP_KEY = '090812a8cbcf00e2831e04f48c0fa243'
 
 const SearchResults = ({ url, ingredients }) => {
-  const { loading, error: restrictionsError, data: restrictionsData } = useQuery(GET_RESTRICTIONS)
-
   const history = useHistory()
   const [results, setResults] = useState([])
   const [error, setError] = useState(false)
@@ -58,9 +54,7 @@ const SearchResults = ({ url, ingredients }) => {
     fetchData()
   }
 
-  if (loading) return <p>Loading...</p>
-
-  if (error || restrictionsError) {
+  if (error) {
     return (
       <>
         <h1>THIS IS AN ERROR PAGE</h1>
@@ -73,7 +67,6 @@ const SearchResults = ({ url, ingredients }) => {
     <>
       <ListContainer>
         <List>
-          {console.log(restrictionsData)}
           {results.map(({ label, url: u, uri }) => (
             <ListItem key={uri} onClick={() => getRecipe(u)}>{label}</ListItem>
           ))}

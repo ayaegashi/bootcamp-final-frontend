@@ -14,9 +14,12 @@ import {
   IngredientAdder,
   IngredientList,
 } from './components/Search'
+import { useQuery } from '@apollo/react-hooks'
+import GET_RESTRICTIONS from './graphql'
 
 const Home = () => {
   const history = useHistory()
+  const { loading, error: restrictionsError, data: restrictionsData } = useQuery(GET_RESTRICTIONS)
 
   const [query, setQuery] = useState('')
   const [ingredients, setIngredients] = useState([])
@@ -25,6 +28,12 @@ const Home = () => {
   if (!localStorage.getItem('token')) {
     console.log("nope", localStorage.getItem('token'))
     history.push('/login')
+  }
+
+  if (loading) return <p>Loading...</p>
+
+  if (restrictionsError) {
+    return <p>{restrictionsError}</p>
   }
 
   const addIngredient = i => {
@@ -37,12 +46,23 @@ const Home = () => {
       link += `q=${query}`
     }
 
+    const { userViewer: { diets, healths } } = restrictionsData
+    if (diets.length > 0) {
+      link += `&diet=${diets[0].restriction}`
+    }
+    healths.forEach(health => {
+      link += `&health=${health.restriction}`
+    })
+
+    console.log(link)
+
     setUrl(link)
   }
 
   return (
     <>
       <PageContainer>
+        {console.log(restrictionsData)}
         <Container>
           <SearchBar setQuery={setQuery} />
           <SubContainer>
