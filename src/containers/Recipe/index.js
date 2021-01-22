@@ -57,8 +57,9 @@ const Recipe = () => {
         <LeftPanel>
           <Title>{title}</Title>
           <ButtonPanel>
-            <Bookmark />
-            <Check />
+            <Bookmark id={ id } link={`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`} />
+            {console.log(id)}
+            <Check id={ id } link={`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`} />
           </ButtonPanel>
           <IngredientsContainer>
             <Ingredients ingredients={ingredients} />
