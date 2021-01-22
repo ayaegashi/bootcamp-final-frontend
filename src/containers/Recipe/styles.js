@@ -57,6 +57,7 @@ export const IngredientsContainer = styled.div`
   border-radius: 5px;
   padding: 20px;
   background-color: white;
+  margin-left: 70px;
 `
 
 export const StepsContainer = styled.div`
