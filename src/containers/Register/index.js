@@ -62,12 +62,12 @@ const Register = ({ setIsLoggedIn }) => {
         }
     })
 
-    const [addDiet] = useMutation(ADD_DIET, {
+    const [addDiet, {error: dietError}] = useMutation(ADD_DIET, {
         onCompleted: () => {
             console.log("diet added")
         }
     })
-    const [addHealth] = useMutation(ADD_HEALTH)
+    const [addHealth, {error: healthError}] = useMutation(ADD_HEALTH)
 
     const handleDietCheck = ({ target }) => {
         setDiet(s => ({ ...s, [target.name]: !s[target.name] }));}
@@ -96,9 +96,6 @@ const Register = ({ setIsLoggedIn }) => {
                 addDiet({
                     variables: {
                         input: {
-                            user: {
-                                id: userId,
-                            },
                             restriction: key,
                         },
                     },
@@ -110,9 +107,6 @@ const Register = ({ setIsLoggedIn }) => {
                 addHealth({
                     variables: {
                         input: {
-                            user: {
-                                id: userId,
-                            },
                             restriction: key,
                         },
                     },

@@ -20,13 +20,6 @@ export const ADD_DIET = gql`
     mutation addDiet($input:DietInput!){
         addDiet(input:$input){
             id
-            user {
-                id
-                email
-                password
-                createdAt
-                updatedAt
-            }
             restriction
         }
     }
@@ -37,13 +30,6 @@ export const ADD_HEALTH = gql`
     mutation addHealth($input:HealthInput!){
         addHealth(input:$input){
             id
-            user {
-                id
-                email
-                password
-                createdAt
-                updatedAt
-            }
             restriction
         }
     }
