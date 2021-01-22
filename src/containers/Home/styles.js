@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const PageContainer = styled.div`
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   background-color: ${props => props.theme.colors.yellow};
