@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import {Container, LoginRegisterButton, StyledForm} from '../../styles'
+import {LoginRegisterButton, StyledForm} from '../../styles'
+import {PageContainer, Title, Container} from './styles'
 import InputBlock from '../../components/LoginRegister/InputBlock'
 import { LOGIN } from './graphql'
 import { useMutation } from '@apollo/react-hooks'
@@ -39,10 +40,11 @@ const Login = ({ setIsLoggedIn }) => {
 
 
     return (
+        <PageContainer>
         <Container>
         { localStorage.clear() }
         <StyledForm onSubmit={ login }>
-            <h1>Welcome back to Recipe Central</h1>
+            <Title>Welcome Back to Recipe Central</Title>
             <p> { errorMessage } </p>
             <InputBlock 
                 label="Email" 
@@ -62,6 +64,7 @@ const Login = ({ setIsLoggedIn }) => {
             <p>or <Link to="/register">Register</Link></p>
         </StyledForm>
         </Container>
+        </PageContainer>
     )
 }
 
