@@ -13,7 +13,7 @@ import {
   PageContainer,
 } from './styles'
 
-const API_KEY = '5dc246545b634cc48af9fb7a2a5e609a'
+const API_KEY = '8f354abf8b1c4217b1c1289b157ec811'
 
 const Recipe = () => {
   const { id } = useParams()
